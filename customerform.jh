@@ -1,0 +1,47 @@
+entity Customer {
+	name String required
+    pan String
+	entityType String required
+}
+
+entity Address {
+	addressLine1 String required
+    addressLine2 String
+    city String required
+    pinCode Number required
+    stateCode GstStateCode
+    state String required
+    country String required
+    
+    gstRegistrationType GstRegistrationType
+    gstNumber String
+    
+    //Office Location
+    latitude String
+    longitude String
+    
+    // Reception/Office contact
+    number String
+    email String
+}
+
+enum GstRegistrationType {
+    Punjab, Himachal
+}
+
+enum GstStateCode {
+	Punjab, Himachal
+}
+
+relationship ManyToOne {
+	Address{manager} to Customer
+}
+
+// Set pagination options
+paginate Customer with infinite-scroll
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
